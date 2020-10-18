@@ -33,6 +33,15 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    protected function authenticated($request,$user){
+        if($user->role === 'admin'){
+            return redirect()->intended('admin'); //redirect to admin panel
+        }
+    
+        return redirect()->intended('/'); //redirect to standard user homepage
+    }
+    
     public function __construct()
     {
         $this->middleware('guest')->except(['logout', 'getLogout']);
